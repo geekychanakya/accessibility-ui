@@ -49,7 +49,7 @@ describe('Tooltip', () => {
       screen.getByText('Hover me').focus();
     });
 
-    expect(screen.getByRole('tooltip')).toBeInTheDocument();
+    expect(await screen.findByRole('tooltip')).toBeInTheDocument();
   });
 
   it('tooltip has correct role', async () => {

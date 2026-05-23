@@ -1,9 +1,6 @@
 import {
   createContext,
   useContext,
-  type Context,
-  type Provider,
-  type ReactNode,
 } from 'react';
 
 export function createStrictContext<T>(displayName: string) {

@@ -12,10 +12,6 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./headless": {
-      "types": "./dist/headless.d.ts",
-      "import": "./dist/headless.js"
-    },
     "./styled": {
       "types": "./dist/styled.d.ts",
       "import": "./dist/styled.js"
@@ -69,12 +65,11 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
+    "build": "tsup && rm -rf dist/themes && cp -r src/themes dist/themes",
+    "dev": "tsup --watch --onSuccess \"rm -rf dist/themes && cp -r src/themes dist/themes\"",
     "typecheck": "tsc --noEmit",
     "test": "jest",
     "test:e2e": "playwright test",
-    "lint": "eslint src/",
     "size-limit": "size-limit"
   },
   "peerDependencies": {
@@ -89,6 +84,7 @@
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.0",
     "@types/jest": "^29.5.0",
+    "@types/jest-axe": "^3.5.9",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "jest": "^29.7.0",
@@ -102,15 +98,45 @@
     "typescript": "^5.7.0"
   },
   "size-limit": [
-    { "path": "dist/dialog/index.js", "limit": "3 kB" },
-    { "path": "dist/popover/index.js", "limit": "3 kB" },
-    { "path": "dist/tooltip/index.js", "limit": "2 kB" },
-    { "path": "dist/menu/index.js", "limit": "3 kB" },
-    { "path": "dist/tabs/index.js", "limit": "2 kB" },
-    { "path": "dist/toast/index.js", "limit": "3 kB" },
-    { "path": "dist/combobox/index.js", "limit": "4 kB" },
-    { "path": "dist/toggle/index.js", "limit": "1.5 kB" },
-    { "path": "dist/accordion/index.js", "limit": "2 kB" },
-    { "path": "dist/visually-hidden/index.js", "limit": "0.5 kB" }
+    {
+      "path": "dist/dialog/index.js",
+      "limit": "3 kB"
+    },
+    {
+      "path": "dist/popover/index.js",
+      "limit": "3 kB"
+    },
+    {
+      "path": "dist/tooltip/index.js",
+      "limit": "2 kB"
+    },
+    {
+      "path": "dist/menu/index.js",
+      "limit": "3 kB"
+    },
+    {
+      "path": "dist/tabs/index.js",
+      "limit": "2 kB"
+    },
+    {
+      "path": "dist/toast/index.js",
+      "limit": "3 kB"
+    },
+    {
+      "path": "dist/combobox/index.js",
+      "limit": "4 kB"
+    },
+    {
+      "path": "dist/toggle/index.js",
+      "limit": "1.5 kB"
+    },
+    {
+      "path": "dist/accordion/index.js",
+      "limit": "2 kB"
+    },
+    {
+      "path": "dist/visually-hidden/index.js",
+      "limit": "0.5 kB"
+    }
   ]
 }

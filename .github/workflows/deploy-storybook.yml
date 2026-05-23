@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
 
+concurrency:
+  group: deploy-storybook-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   deploy:
     name: Deploy to Cloudflare Pages
@@ -12,9 +16,11 @@ jobs:
       contents: read
       deployments: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v4.3.0
+      - uses: pnpm/action-setup@v4.0.0
+        with:
+          version: 9.15.4
+      - uses: actions/setup-node@v4.4.0
         with:
           node-version: 20
           cache: pnpm
@@ -22,10 +28,8 @@ jobs:
       - run: pnpm build
       - run: pnpm --filter docs build-storybook
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ax-ui-docs
-          directory: apps/docs/storybook-static
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+        run: npx wrangler@3 pages deploy storybook-static --project-name=accessibility-ui
+        working-directory: apps/docs
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

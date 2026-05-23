@@ -1,18 +1,12 @@
 import {
   forwardRef,
-  useRef,
   useEffect,
-  useCallback,
   useState,
-  createContext,
-  useContext,
-  type ReactNode,
   type HTMLAttributes,
   type ButtonHTMLAttributes,
-  type KeyboardEvent,
 } from 'react';
 import { createStrictContext } from '../utils/create-context';
-import { useId, useControllable } from '../utils/hooks';
+import { useId } from '../utils/hooks';
 
 interface AccordionContextValue {
   type: 'single' | 'multiple';

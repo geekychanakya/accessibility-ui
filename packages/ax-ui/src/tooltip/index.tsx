@@ -39,7 +39,7 @@ export function TooltipRoot({
   const [open, setOpenState] = useState(controlledOpen ?? defaultOpen);
   const triggerRef = useRef<HTMLElement | null>(null);
   const contentId = useId();
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const isControlled = controlledOpen !== undefined;
   const actualOpen = isControlled ? controlledOpen : open;

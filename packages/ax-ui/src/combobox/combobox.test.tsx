@@ -121,7 +121,7 @@ describe('Combobox', () => {
     await user.keyboard('{ArrowDown}');
     await user.keyboard('{Enter}');
 
-    await user.click(input);
+    await user.keyboard('{ArrowDown}');
     const options = screen.getAllByRole('option');
     expect(options[0]).toHaveAttribute('aria-selected', 'true');
   });

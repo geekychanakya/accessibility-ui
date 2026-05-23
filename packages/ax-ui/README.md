@@ -37,7 +37,7 @@ function App() {
 
 ```tsx
 // Headless: logic + ARIA + classNames only (bring your own styles)
-import { Dialog } from '@ax-ui/react/headless';
+import { Dialog } from '@ax-ui/react';
 
 // Styled: includes default CSS with CSS custom properties
 import { Dialog } from '@ax-ui/react/styled';
@@ -122,54 +122,28 @@ All components use the **compound component** pattern:
 | Tailwind CSS | Consumers bring their own styling system; library uses CSS custom properties |
 | Animation libraries | Keeps bundle minimal; consumers add animations via CSS transitions/keyframes |
 
-## Project Structure
-
-```
-packages/
-  ax-ui/
-    src/
-      dialog/        # Dialog primitive
-      popover/       # Popover primitive
-      tooltip/       # Tooltip primitive
-      menu/          # Menu primitive
-      tabs/          # Tabs primitive
-      toast/         # Toast primitive
-      combobox/      # Combobox primitive
-      toggle/        # Toggle + Switch primitives
-      accordion/     # Accordion primitive
-      visually-hidden/
-      utils/         # Shared utilities (context, focus, hooks)
-      themes/        # CSS custom property themes
-    e2e/             # Playwright integration tests
-    package.json
-    tsup.config.ts
-apps/
-  docs/              # Storybook (deployed as live spec)
-```
-
 ## Development
 
+This package lives in the [ax-ui monorepo](../../README.md). Clone the repo and run commands from the root:
+
 ```bash
-# Install dependencies
 pnpm install
-
-# Build the library
 pnpm build
-
-# Run unit tests
+pnpm storybook    # http://localhost:6006
 pnpm test
-
-# Run Playwright tests
 pnpm test:e2e
-
-# Type check
 pnpm typecheck
-
-# Check bundle sizes
 pnpm size-limit
+```
 
-# Start Storybook
-pnpm storybook
+Source layout:
+
+```
+src/
+  dialog/ popover/ tooltip/ menu/ tabs/
+  toast/ combobox/ toggle/ accordion/
+  visually-hidden/ utils/ themes/
+e2e/                  # Playwright tests
 ```
 
 ## Versioning Policy
@@ -180,17 +154,9 @@ pnpm storybook
 - Pre-1.0: API may change between minor versions (documented in CHANGELOG)
 - Post-1.0: Breaking changes only in major versions with migration guides
 
-## CI Pipeline
+## CI
 
-Every PR runs:
-1. **Lint & Typecheck** — ESLint + `tsc --noEmit`
-2. **Unit & A11y Tests** — Jest + React Testing Library + jest-axe
-3. **Playwright E2E** — Keyboard interaction tests
-4. **Build & Size Check** — tsup build + size-limit budget enforcement
-
-On merge to `main`:
-- Changesets publishes to npm (if changeset is present)
-- Storybook deploys to Cloudflare Pages
+See the [monorepo README](../../README.md#ci--deployment) for the full CI and deployment pipeline.
 
 ## License
 

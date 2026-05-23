@@ -3,14 +3,13 @@ import {
   useRef,
   useEffect,
   useCallback,
-  useState,
   type ReactNode,
   type HTMLAttributes,
   type ButtonHTMLAttributes,
   type MouseEvent,
 } from 'react';
 import { createStrictContext } from '../utils/create-context';
-import { useFocusTrap, getFocusableElements } from '../utils/focus';
+import { useFocusTrap } from '../utils/focus';
 import { useId, useControllable } from '../utils/hooks';
 import { type PolymorphicProps, Slot } from '../utils/polymorphic';
 

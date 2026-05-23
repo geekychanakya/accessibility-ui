@@ -8,7 +8,6 @@ import {
   type HTMLAttributes,
 } from 'react';
 import { createStrictContext } from '../utils/create-context';
-import { useId } from '../utils/hooks';
 
 interface ToastContextValue {
   toasts: ToastData[];
@@ -56,16 +55,16 @@ export function ToastProvider({ children, duration = 5000 }: ToastProviderProps)
   );
 }
 
-export interface ToastViewportProps extends HTMLAttributes<HTMLOListElement> {
+export interface ToastViewportProps extends HTMLAttributes<HTMLDivElement> {
   label?: string;
 }
 
-export const ToastViewport = forwardRef<HTMLOListElement, ToastViewportProps>(
+export const ToastViewport = forwardRef<HTMLDivElement, ToastViewportProps>(
   function ToastViewport({ label = 'Notifications', children, ...props }, ref) {
     const { toasts, removeToast } = useToastContext();
 
     return (
-      <ol
+      <div
         ref={ref}
         role="region"
         aria-label={label}
@@ -79,7 +78,7 @@ export const ToastViewport = forwardRef<HTMLOListElement, ToastViewportProps>(
           <ToastItem key={toast.id} toast={toast} onDismiss={() => removeToast(toast.id)} />
         ))}
         {children}
-      </ol>
+      </div>
     );
   }
 );
@@ -90,7 +89,7 @@ interface ToastItemProps {
 }
 
 function ToastItem({ toast, onDismiss }: ToastItemProps) {
-  const timerRef = useRef<ReturnType<typeof setTimeout>>();
+  const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     if (toast.duration && toast.duration > 0) {
@@ -100,7 +99,7 @@ function ToastItem({ toast, onDismiss }: ToastItemProps) {
   }, [toast.duration, onDismiss]);
 
   return (
-    <li
+    <div
       role="status"
       aria-atomic="true"
       className="ax-toast"
@@ -114,9 +113,9 @@ function ToastItem({ toast, onDismiss }: ToastItemProps) {
         aria-label="Dismiss"
         className="ax-toast-close"
       >
-        ×
+        x
       </button>
-    </li>
+    </div>
   );
 }
 

@@ -1,12 +1,3 @@
-export { Dialog } from './dialog';
-export { Popover } from './popover';
-export { Tooltip } from './tooltip';
-export { Menu } from './menu';
-export { Tabs } from './tabs';
-export { Toast, useToast } from './toast';
-export { Combobox } from './combobox';
-export { Toggle, Switch } from './toggle';
-export { Accordion } from './accordion';
-export { VisuallyHidden } from './visually-hidden';
+export * from './index';
 
 import './themes/default.css';

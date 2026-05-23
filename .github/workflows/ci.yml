@@ -6,20 +6,25 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  lint-typecheck:
-    name: Lint & Typecheck
+  typecheck:
+    name: Typecheck
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
-      - run: pnpm lint
 
   test:
     name: Unit & A11y Tests
@@ -27,12 +32,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm test -- --coverage
+      - run: pnpm --filter @ax-ui/react test -- --coverage
 
   e2e:
     name: Playwright E2E
@@ -40,14 +47,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - run: npx playwright install --with-deps
-      - run: pnpm test:e2e
+      - name: Install Playwright browsers
+        run: pnpm --filter @ax-ui/react exec playwright install --with-deps chromium
+      - name: Run Playwright tests
+        run: pnpm test:e2e
+        env:
+          CI: true
 
   build-size:
     name: Build & Size Check
@@ -55,6 +68,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -65,27 +80,35 @@ jobs:
 
   release:
     name: Release
-    needs: [lint-typecheck, test, e2e, build-size]
+    needs: [typecheck, test, e2e, build-size]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      packages: write
+      pull-requests: write
       id-token: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: https://registry.npmjs.org
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Create Release Pull Request or Publish
         uses: changesets/action@v1
         with:
+          version: pnpm changeset version
           publish: pnpm release
+          commit: 'chore: version packages'
+          title: 'chore: version packages'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

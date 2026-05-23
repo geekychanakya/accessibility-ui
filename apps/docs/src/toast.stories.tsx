@@ -6,7 +6,7 @@ const meta: Meta = {
   parameters: {
     docs: {
       description: {
-        component: 'Toast notifications with auto-dismiss. Uses a live region for screen reader announcements.',
+        component: 'Toast notifications with auto-dismiss. Uses a live region for screen reader announcement.',
       },
     },
   },

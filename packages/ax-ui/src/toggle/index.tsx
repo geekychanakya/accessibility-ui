@@ -1,7 +1,5 @@
 import {
   forwardRef,
-  useCallback,
-  type InputHTMLAttributes,
   type HTMLAttributes,
   type KeyboardEvent,
 } from 'react';

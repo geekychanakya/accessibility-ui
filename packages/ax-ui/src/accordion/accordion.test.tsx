@@ -61,7 +61,7 @@ describe('Accordion', () => {
 
   it('content region has aria-labelledby', () => {
     renderAccordion();
-    const content = screen.getByText('Content 1').parentElement;
+    const content = screen.getByText('Content 1');
     expect(content).toHaveAttribute('role', 'region');
     expect(content).toHaveAttribute('aria-labelledby');
   });

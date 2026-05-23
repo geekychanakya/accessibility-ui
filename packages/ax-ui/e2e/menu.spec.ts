@@ -18,21 +18,24 @@ test.describe('Menu', () => {
 
   test('navigates with ArrowDown', async ({ page }) => {
     await page.click('button:has-text("Actions")');
-    await page.keyboard.press('ArrowDown');
     const items = page.locator('[role="menuitem"]');
+    await expect(items.first()).toBeFocused(); // Wait for initial focus
+    await page.keyboard.press('ArrowDown');
     await expect(items.nth(1)).toBeFocused();
   });
 
   test('navigates with ArrowUp', async ({ page }) => {
     await page.click('button:has-text("Actions")');
-    await page.keyboard.press('ArrowUp');
     const items = page.locator('[role="menuitem"]');
+    await expect(items.first()).toBeFocused(); // Wait for initial focus
+    await page.keyboard.press('ArrowUp');
     await expect(items.last()).toBeFocused();
   });
 
   test('wraps from last to first with ArrowDown', async ({ page }) => {
     await page.click('button:has-text("Actions")');
     const items = page.locator('[role="menuitem"]');
+    await expect(items.first()).toBeFocused(); // Wait for initial focus
     const count = await items.count();
 
     for (let i = 0; i < count; i++) {

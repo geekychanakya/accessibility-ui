@@ -9,7 +9,7 @@ function renderPopover() {
   return render(
     <Popover.Root>
       <Popover.Trigger>Toggle Popover</Popover.Trigger>
-      <Popover.Content>
+      <Popover.Content aria-label="Popover test">
         <p>Popover content</p>
         <Popover.Close>Close</Popover.Close>
       </Popover.Content>

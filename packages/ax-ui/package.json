@@ -1,0 +1,116 @@
+{
+  "name": "@ax-ui/react",
+  "version": "0.1.0",
+  "description": "Accessibility-first React component primitives. Correct, tested, low-dependency.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./headless": {
+      "types": "./dist/headless.d.ts",
+      "import": "./dist/headless.js"
+    },
+    "./styled": {
+      "types": "./dist/styled.d.ts",
+      "import": "./dist/styled.js"
+    },
+    "./dialog": {
+      "types": "./dist/dialog/index.d.ts",
+      "import": "./dist/dialog/index.js"
+    },
+    "./popover": {
+      "types": "./dist/popover/index.d.ts",
+      "import": "./dist/popover/index.js"
+    },
+    "./tooltip": {
+      "types": "./dist/tooltip/index.d.ts",
+      "import": "./dist/tooltip/index.js"
+    },
+    "./menu": {
+      "types": "./dist/menu/index.d.ts",
+      "import": "./dist/menu/index.js"
+    },
+    "./tabs": {
+      "types": "./dist/tabs/index.d.ts",
+      "import": "./dist/tabs/index.js"
+    },
+    "./toast": {
+      "types": "./dist/toast/index.d.ts",
+      "import": "./dist/toast/index.js"
+    },
+    "./combobox": {
+      "types": "./dist/combobox/index.d.ts",
+      "import": "./dist/combobox/index.js"
+    },
+    "./toggle": {
+      "types": "./dist/toggle/index.d.ts",
+      "import": "./dist/toggle/index.js"
+    },
+    "./accordion": {
+      "types": "./dist/accordion/index.d.ts",
+      "import": "./dist/accordion/index.js"
+    },
+    "./visually-hidden": {
+      "types": "./dist/visually-hidden/index.d.ts",
+      "import": "./dist/visually-hidden/index.js"
+    },
+    "./themes/default.css": "./dist/themes/default.css",
+    "./themes/dark.css": "./dist/themes/dark.css"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "test:e2e": "playwright test",
+    "lint": "eslint src/",
+    "size-limit": "size-limit"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@axe-core/react": "^4.10.0",
+    "@playwright/test": "^1.49.0",
+    "@size-limit/preset-small-lib": "^11.1.0",
+    "@testing-library/jest-dom": "^6.6.0",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.0",
+    "@types/jest": "^29.5.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "jest": "^29.7.0",
+    "jest-axe": "^9.0.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "size-limit": "^11.1.0",
+    "ts-jest": "^29.2.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.7.0"
+  },
+  "size-limit": [
+    { "path": "dist/dialog/index.js", "limit": "3 kB" },
+    { "path": "dist/popover/index.js", "limit": "3 kB" },
+    { "path": "dist/tooltip/index.js", "limit": "2 kB" },
+    { "path": "dist/menu/index.js", "limit": "3 kB" },
+    { "path": "dist/tabs/index.js", "limit": "2 kB" },
+    { "path": "dist/toast/index.js", "limit": "3 kB" },
+    { "path": "dist/combobox/index.js", "limit": "4 kB" },
+    { "path": "dist/toggle/index.js", "limit": "1.5 kB" },
+    { "path": "dist/accordion/index.js", "limit": "2 kB" },
+    { "path": "dist/visually-hidden/index.js", "limit": "0.5 kB" }
+  ]
+}

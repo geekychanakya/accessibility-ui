@@ -1,0 +1,354 @@
+:root {
+  --ax-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ax-font-size-sm: 0.875rem;
+  --ax-font-size-base: 1rem;
+  --ax-font-size-lg: 1.125rem;
+
+  --ax-color-bg: #ffffff;
+  --ax-color-bg-subtle: #f8f9fa;
+  --ax-color-bg-muted: #f1f3f5;
+  --ax-color-bg-elevated: #ffffff;
+  --ax-color-fg: #212529;
+  --ax-color-fg-muted: #6c757d;
+  --ax-color-border: #dee2e6;
+  --ax-color-border-focus: #4dabf7;
+  --ax-color-primary: #228be6;
+  --ax-color-primary-fg: #ffffff;
+  --ax-color-danger: #fa5252;
+  --ax-color-success: #40c057;
+
+  --ax-radius-sm: 4px;
+  --ax-radius-md: 6px;
+  --ax-radius-lg: 8px;
+  --ax-radius-full: 9999px;
+
+  --ax-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --ax-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --ax-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+
+  --ax-space-1: 0.25rem;
+  --ax-space-2: 0.5rem;
+  --ax-space-3: 0.75rem;
+  --ax-space-4: 1rem;
+  --ax-space-5: 1.25rem;
+  --ax-space-6: 1.5rem;
+
+  --ax-transition-fast: 150ms ease;
+  --ax-transition-normal: 200ms ease;
+}
+
+/* Dialog */
+.ax-dialog-content {
+  font-family: var(--ax-font-family);
+  background: var(--ax-color-bg-elevated);
+  color: var(--ax-color-fg);
+  border: 1px solid var(--ax-color-border);
+  border-radius: var(--ax-radius-lg);
+  box-shadow: var(--ax-shadow-lg);
+  padding: var(--ax-space-6);
+  max-width: 32rem;
+  width: 90vw;
+}
+
+.ax-dialog-content::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.ax-dialog-title {
+  font-size: var(--ax-font-size-lg);
+  font-weight: 600;
+  margin: 0 0 var(--ax-space-2);
+}
+
+.ax-dialog-description {
+  color: var(--ax-color-fg-muted);
+  font-size: var(--ax-font-size-sm);
+  margin: 0 0 var(--ax-space-4);
+}
+
+/* Popover */
+.ax-popover-content {
+  font-family: var(--ax-font-family);
+  background: var(--ax-color-bg-elevated);
+  color: var(--ax-color-fg);
+  border: 1px solid var(--ax-color-border);
+  border-radius: var(--ax-radius-md);
+  box-shadow: var(--ax-shadow-md);
+  padding: var(--ax-space-4);
+  z-index: 50;
+}
+
+/* Tooltip */
+.ax-tooltip-content {
+  font-family: var(--ax-font-family);
+  background: var(--ax-color-fg);
+  color: var(--ax-color-bg);
+  font-size: var(--ax-font-size-sm);
+  padding: var(--ax-space-1) var(--ax-space-2);
+  border-radius: var(--ax-radius-sm);
+  z-index: 100;
+  max-width: 20rem;
+}
+
+/* Menu */
+.ax-menu-content {
+  font-family: var(--ax-font-family);
+  background: var(--ax-color-bg-elevated);
+  color: var(--ax-color-fg);
+  border: 1px solid var(--ax-color-border);
+  border-radius: var(--ax-radius-md);
+  box-shadow: var(--ax-shadow-md);
+  padding: var(--ax-space-1);
+  min-width: 12rem;
+  z-index: 50;
+}
+
+.ax-menu-item {
+  display: flex;
+  align-items: center;
+  padding: var(--ax-space-2) var(--ax-space-3);
+  border-radius: var(--ax-radius-sm);
+  cursor: pointer;
+  outline: none;
+  font-size: var(--ax-font-size-sm);
+  transition: background var(--ax-transition-fast);
+}
+
+.ax-menu-item:focus {
+  background: var(--ax-color-bg-muted);
+}
+
+.ax-menu-item[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ax-menu-separator {
+  height: 1px;
+  background: var(--ax-color-border);
+  margin: var(--ax-space-1) 0;
+}
+
+/* Tabs */
+.ax-tabs-list {
+  display: flex;
+  border-bottom: 1px solid var(--ax-color-border);
+  gap: var(--ax-space-1);
+}
+
+.ax-tabs-trigger {
+  font-family: var(--ax-font-family);
+  font-size: var(--ax-font-size-sm);
+  padding: var(--ax-space-2) var(--ax-space-3);
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--ax-color-fg-muted);
+  border-bottom: 2px solid transparent;
+  transition: color var(--ax-transition-fast), border-color var(--ax-transition-fast);
+  outline: none;
+}
+
+.ax-tabs-trigger:focus-visible {
+  outline: 2px solid var(--ax-color-border-focus);
+  outline-offset: -2px;
+}
+
+.ax-tabs-trigger[data-state="active"] {
+  color: var(--ax-color-primary);
+  border-bottom-color: var(--ax-color-primary);
+}
+
+.ax-tabs-content {
+  padding: var(--ax-space-4) 0;
+}
+
+/* Accordion */
+.ax-accordion-item {
+  border-bottom: 1px solid var(--ax-color-border);
+}
+
+.ax-accordion-trigger {
+  font-family: var(--ax-font-family);
+  font-size: var(--ax-font-size-base);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--ax-space-4) 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--ax-color-fg);
+  text-align: left;
+  outline: none;
+}
+
+.ax-accordion-trigger:focus-visible {
+  outline: 2px solid var(--ax-color-border-focus);
+  outline-offset: 2px;
+}
+
+.ax-accordion-content {
+  padding-bottom: var(--ax-space-4);
+  color: var(--ax-color-fg-muted);
+  font-size: var(--ax-font-size-sm);
+}
+
+/* Toggle/Switch */
+.ax-toggle {
+  font-family: var(--ax-font-family);
+  padding: var(--ax-space-2) var(--ax-space-3);
+  border: 1px solid var(--ax-color-border);
+  border-radius: var(--ax-radius-md);
+  background: var(--ax-color-bg);
+  cursor: pointer;
+  transition: background var(--ax-transition-fast), border-color var(--ax-transition-fast);
+  outline: none;
+}
+
+.ax-toggle:focus-visible {
+  outline: 2px solid var(--ax-color-border-focus);
+  outline-offset: 2px;
+}
+
+.ax-toggle[data-state="on"] {
+  background: var(--ax-color-primary);
+  border-color: var(--ax-color-primary);
+  color: var(--ax-color-primary-fg);
+}
+
+.ax-switch {
+  position: relative;
+  width: 2.75rem;
+  height: 1.5rem;
+  border-radius: var(--ax-radius-full);
+  border: none;
+  background: var(--ax-color-bg-muted);
+  cursor: pointer;
+  padding: 2px;
+  transition: background var(--ax-transition-fast);
+  outline: none;
+}
+
+.ax-switch:focus-visible {
+  outline: 2px solid var(--ax-color-border-focus);
+  outline-offset: 2px;
+}
+
+.ax-switch[data-state="checked"] {
+  background: var(--ax-color-primary);
+}
+
+.ax-switch-thumb {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: var(--ax-radius-full);
+  background: white;
+  box-shadow: var(--ax-shadow-sm);
+  transition: transform var(--ax-transition-fast);
+}
+
+.ax-switch[data-state="checked"] .ax-switch-thumb {
+  transform: translateX(1.25rem);
+}
+
+/* Toast */
+.ax-toast-viewport {
+  position: fixed;
+  bottom: var(--ax-space-4);
+  right: var(--ax-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ax-space-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 9999;
+  max-width: 24rem;
+  width: 100%;
+}
+
+.ax-toast {
+  font-family: var(--ax-font-family);
+  background: var(--ax-color-bg-elevated);
+  border: 1px solid var(--ax-color-border);
+  border-radius: var(--ax-radius-md);
+  box-shadow: var(--ax-shadow-md);
+  padding: var(--ax-space-3) var(--ax-space-4);
+  position: relative;
+}
+
+.ax-toast-title {
+  font-weight: 600;
+  font-size: var(--ax-font-size-sm);
+}
+
+.ax-toast-description {
+  font-size: var(--ax-font-size-sm);
+  color: var(--ax-color-fg-muted);
+  margin-top: var(--ax-space-1);
+}
+
+.ax-toast-close {
+  position: absolute;
+  top: var(--ax-space-2);
+  right: var(--ax-space-2);
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--ax-color-fg-muted);
+  font-size: var(--ax-font-size-lg);
+  line-height: 1;
+}
+
+/* Combobox */
+.ax-combobox-input {
+  font-family: var(--ax-font-family);
+  font-size: var(--ax-font-size-base);
+  padding: var(--ax-space-2) var(--ax-space-3);
+  border: 1px solid var(--ax-color-border);
+  border-radius: var(--ax-radius-md);
+  width: 100%;
+  outline: none;
+  transition: border-color var(--ax-transition-fast);
+}
+
+.ax-combobox-input:focus {
+  border-color: var(--ax-color-border-focus);
+}
+
+.ax-combobox-list {
+  font-family: var(--ax-font-family);
+  list-style: none;
+  margin: var(--ax-space-1) 0 0;
+  padding: var(--ax-space-1);
+  border: 1px solid var(--ax-color-border);
+  border-radius: var(--ax-radius-md);
+  background: var(--ax-color-bg-elevated);
+  box-shadow: var(--ax-shadow-md);
+  max-height: 15rem;
+  overflow-y: auto;
+}
+
+.ax-combobox-option {
+  padding: var(--ax-space-2) var(--ax-space-3);
+  border-radius: var(--ax-radius-sm);
+  cursor: pointer;
+  font-size: var(--ax-font-size-sm);
+  transition: background var(--ax-transition-fast);
+}
+
+.ax-combobox-option[data-active] {
+  background: var(--ax-color-bg-muted);
+}
+
+.ax-combobox-option[aria-selected="true"] {
+  font-weight: 600;
+}
+
+.ax-combobox-option[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

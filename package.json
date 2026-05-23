@@ -1,0 +1,24 @@
+{
+  "name": "ax-ui-monorepo",
+  "private": true,
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm --filter @ax-ui/react build",
+    "dev": "pnpm --filter docs dev",
+    "test": "pnpm --filter @ax-ui/react test",
+    "test:e2e": "pnpm --filter @ax-ui/react test:e2e",
+    "typecheck": "pnpm --filter @ax-ui/react typecheck",
+    "lint": "pnpm --filter @ax-ui/react lint",
+    "size-limit": "pnpm --filter @ax-ui/react size-limit",
+    "storybook": "pnpm --filter docs storybook",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.0"
+  }
+}
